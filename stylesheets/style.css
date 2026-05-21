@@ -1,0 +1,378 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	font-family: "Inter", sans-serif;
+}
+
+body {
+	background:#070707;
+	color:#f5f5f5;
+	height:100vh;
+	overflow:hidden;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	padding:20px;
+}
+
+    .dashboard{
+      width:100%;
+      max-width:1600px;
+      height:95vh;
+      background:#0a0a0a;
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:22px;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 300px 1fr 320px;
+      grid-template-rows: 80px 1fr 250px;
+      gap:1px;
+      background-color:rgba(255,255,255,0.05);
+    }
+
+    .panel{
+      background:#090909;
+      position:relative;
+    }
+
+    /* NAVBAR */
+
+    .navbar{
+      grid-column:1 / 4;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 30px;
+      background:#050505;
+    }
+
+    .logo{
+      font-size:24px;
+      letter-spacing:2px;
+      font-weight:600;
+    }
+
+    .logo span{
+      color:#d6b07d;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:35px;
+      color:#aaa;
+      font-size:14px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:inherit;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:white;
+    }
+
+    .search{
+      width:280px;
+      height:42px;
+      border-radius:30px;
+      background:#101010;
+      border:1px solid rgba(255,255,255,0.08);
+      padding:0 18px;
+      color:white;
+      outline:none;
+    }
+
+    /* LEFT SIDEBAR */
+
+    .left{
+      padding:35px 28px;
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+    }
+
+    .live{
+      color:#d6b07d;
+      font-size:13px;
+      letter-spacing:1px;
+    }
+
+    .title{
+      font-size:58px;
+      line-height:0.95;
+      font-weight:300;
+    }
+
+    .subtitle{
+      color:#888;
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .buttons{
+      display:flex;
+      gap:12px;
+    }
+
+    .btn{
+      padding:14px 22px;
+      border-radius:14px;
+      border:none;
+      cursor:pointer;
+      font-size:14px;
+      transition:0.3s;
+    }
+
+    .primary{
+      background:#d6b07d;
+      color:#111;
+    }
+
+    .secondary{
+      background:#111;
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+
+    .card{
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:20px;
+      background:#0c0c0c;
+    }
+
+    .mini-title{
+      color:#999;
+      font-size:13px;
+      margin-bottom:10px;
+    }
+
+    .event{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:#ddd;
+    }
+
+    .status-box{
+      margin-top:auto;
+      border-top:1px solid rgba(255,255,255,0.06);
+      padding-top:20px;
+    }
+
+    .status-grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:15px;
+    }
+
+    .status-item h3{
+      font-size:13px;
+      color:#777;
+      margin-bottom:6px;
+      font-weight:400;
+    }
+
+    .status-item p{
+      font-size:18px;
+    }
+
+    /* CENTER */
+
+    .hero{
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0.9;
+    }
+
+    .missionsHero {
+	    padding: 20px;
+    }
+
+    .overlay-lines{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+
+    .overlay-lines::before,
+    .overlay-lines::after{
+      content:"";
+      position:absolute;
+      background:rgba(255,255,255,0.15);
+    }
+
+    .overlay-lines::before{
+      width:1px;
+      height:100%;
+      left:50%;
+      top:0;
+    }
+
+    .overlay-lines::after{
+      height:1px;
+      width:100%;
+      top:50%;
+      left:0;
+    }
+
+    /* RIGHT */
+
+    .right{
+      padding:25px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .doc-card{
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+      height:260px;
+      background:#111;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .doc-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0.7;
+    }
+
+    .doc-content{
+      position:absolute;
+      bottom:20px;
+      left:20px;
+    }
+
+    .doc-content h2{
+      font-size:42px;
+      font-weight:300;
+      line-height:0.95;
+    }
+
+    .mission-list{
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+    }
+
+    .mission{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:#ddd;
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      padding-bottom:10px;
+    }
+
+    .green-dot{
+      width:8px;
+      height:8px;
+      background:#47ff88;
+      border-radius:50%;
+    }
+
+    /* BOTTOM */
+
+    .bottom{
+      grid-column:2 / 4;
+      display:grid;
+      grid-template-columns: 1.2fr 1fr 1.2fr;
+      gap:1px;
+      background:rgba(255,255,255,0.05);
+    }
+
+    .bottom-card{
+      background:#090909;
+      padding:22px;
+    }
+
+    .bottom-card img{
+      width:100%;
+      border-radius:16px;
+      margin-top:15px;
+    }
+
+    .explore-list{
+      margin-top:20px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .explore-item{
+      display:flex;
+      justify-content:space-between;
+      color:#ddd;
+    }
+
+    .telemetry{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+    }
+
+    .telemetry-stats{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      margin-top:20px;
+    }
+
+    .telemetry-stats h3{
+      color:#777;
+      font-size:12px;
+      margin-bottom:8px;
+    }
+
+    .telemetry-stats p{
+      font-size:20px;
+    }
+
+    .graph{
+      margin-top:auto;
+      height:100px;
+      border-top:1px solid rgba(255,255,255,0.08);
+      position:relative;
+    }
+
+    .wave{
+      position:absolute;
+      width:100%;
+      height:100%;
+    }
+
+    .wave svg{
+      width:100%;
+      height:100%;
+    }
+
+    @media(max-width:1200px){
+
+      body{
+        overflow:auto;
+      }
+
+      .dashboard{
+        height:auto;
+        grid-template-columns:1fr;
+        grid-template-rows:auto;
+      }
+
+      .navbar,
+      .bottom{
+        grid-column:auto;
+      }
+    }
