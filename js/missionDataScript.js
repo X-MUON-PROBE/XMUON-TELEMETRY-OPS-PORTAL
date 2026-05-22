@@ -6,24 +6,28 @@ async function initMissionDashboardPage() {
     const _missionID = _missionIDField.split("=")[1];
     const missionData = await loadMissionData(Number(_missionID));
 
-    console.log(missionData.missionMeasurementRecords.length);
+    document.getElementById("missionNameH1").innerHTML = missionData.missionData.missioN_NAME;
+    
+    requestAnimationFrame(() => {
+        for(let i = 0; i < missionData.missionMeasurementRecords.length; i++) {
+            document.getElementById("sessionList").innerHTML += `<tr>
+                        <td style="padding: 20px;">${i}</td>
+                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].totalGeigerCounts}</td>
+                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].geigerCountsPerMinute}</td>
+                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].geigerDose}</td>
+                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].temperature}</td>
+                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].atmPressure}</td>
+                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].altitude}</td>
+                        <td style="padding: 20px;">(${missionData.missionMeasurementRecords[i].accelVector.ax}, ${missionData.missionMeasurementRecords[i].accelVector.ay}, ${missionData.missionMeasurementRecords[i].accelVector.az})</td>
+                        <td style="padding: 20px;">(${missionData.missionMeasurementRecords[i].gyroVector.gx}, ${missionData.missionMeasurementRecords[i].gyroVector.gy}, ${missionData.missionMeasurementRecords[i].gyroVector.gz})</td>
+                        <td style="padding: 20px;">(${missionData.missionMeasurementRecords[i].magneticFieldVector.mx}, ${missionData.missionMeasurementRecords[i].magneticFieldVector.my}, ${missionData.missionMeasurementRecords[i].magneticFieldVector.mz})</td>
+                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].headingFloat}</td>
+                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].gyroChipTemperature}</td>
+                    </tr>`;
+        }
 
-    for(let i = 0; i < missionData.missionMeasurementRecords.length; i++) {
-        document.getElementById("sessionList").innerHTML += `<tr>
-                    <td style="padding: 20px;">${i}</td>
-                    <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].totalGeigerCounts}</td>
-                    <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].geigerCountsPerMinute}</td>
-                    <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].geigerDose}</td>
-                    <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].temperature}</td>
-                    <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].atmPressure}</td>
-                    <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].altitude}</td>
-                    <td style="padding: 20px;">(${missionData.missionMeasurementRecords[i].accelVector.ax}, ${missionData.missionMeasurementRecords[i].accelVector.ay}, ${missionData.missionMeasurementRecords[i].accelVector.az})</td>
-                    <td style="padding: 20px;">(${missionData.missionMeasurementRecords[i].gyroVector.gx}, ${missionData.missionMeasurementRecords[i].gyroVector.gy}, ${missionData.missionMeasurementRecords[i].gyroVector.gz})</td>
-                    <td style="padding: 20px;">(${missionData.missionMeasurementRecords[i].magneticFieldVector.mx}, ${missionData.missionMeasurementRecords[i].magneticFieldVector.my}, ${missionData.missionMeasurementRecords[i].magneticFieldVector.mz})</td>
-                    <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].headingFloat}</td>
-                    <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].gyroChipTemperature}</td>
-                </tr>`;
-    }
+        document.getElementById("TIME_HOURGLASS").style.display = "none";
+    });
 }
 
 initMissionDashboardPage();
@@ -31,6 +35,8 @@ initMissionDashboardPage();
 //#region METHODS
 
 function loadMissionData(missionID) {
+    document.getElementById("missionsTable").innerHTML += `<div style="display: flex; flex-direction: row; width: 100%; justify-content: center; align-items: center; padding: 200px;"><i id="TIME_HOURGLASS" class="fa-solid fa-hourglass fa-5x fa-spin-pulse" style="color: #d6b081;"></i></div>`;
+
     return new Promise((resolve, reject) => {
         const name = fetch(`http://${global.API_IP_ADDESS}:${global.API_PORT}/telemetry/getMissionData_${missionID}`, {
             method: "GET",

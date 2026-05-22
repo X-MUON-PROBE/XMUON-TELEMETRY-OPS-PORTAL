@@ -215,6 +215,7 @@ body {
 
 .missionsHero {
   padding: 40px;
+  padding-top: 20px;
   width: calc(100vw - 300px);
   background: #090909;
 }
@@ -247,6 +248,11 @@ td, th {
 
 th {
   text-align: center;
+}
+
+#sessionList
+{
+  width: 100%;
 }
 
 .openMissionButton {
