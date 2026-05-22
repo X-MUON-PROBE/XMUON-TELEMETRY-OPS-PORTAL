@@ -6,7 +6,7 @@
     <title>X-MUON PROBE - SESSÕES</title>
     <link href="stylesheets/style.css" rel="stylesheet"/>
   </head>
-
+  
   <body>
     <div class="dashboard">
       <div class="navbar panel">
@@ -28,15 +28,23 @@
           </div>
         </div>
         <div class="missionsHero">
-          <h1>SESSÕES DE MEDIÇÃO:</h1>
+          <h1 id="missionNameH1"></h1>
           <div class="missionsTableContainer">
             <table class="missionsTable">
               <thead style="background-color: #27221a; position: sticky; top: 0;">
                 <tr>
-                  <th>ID SESSÃO</th>
-                  <th>NOME SESSÃO</th>
-                  <th>DATA DE CRIAÇÃO (TIMESTAMP)</th>
-                  <th>ABRIR SESSÃO</th>
+                  <th>ID REGISTO</th>
+                  <th>TOTAL CONTAGENS GEIGER (counts)</th>
+                  <th>ATIVIDADE (counts/min)</th>
+                  <th>DOSE RADIAÇÃO MUÓNICA (μSv)</th>
+                  <th>TEMPERATURA AMBIENTE (ºC)</th>
+                  <th>PRESSÃO ATMOSFÉRICA (mbar)</th>
+                  <th>ALTITUDE (m)</th>
+                  <th>ACELERAÇÃO (m/s^2)</th>
+                  <th>VELOCIDADE ANGULAR (ROTAÇÃO - º/sec)</th>
+                  <th>CAMPO MAGNÉTICO (μT)</th>
+                  <th>ORIENTAÇÃO GEOGRÁFICA</th>
+                  <th>TEMPERATURA GIROSCÓPIO (ºc)</th>
                 </tr>
               </thead>
               <tbody id="sessionList"></tbody>
@@ -47,5 +55,5 @@
     </div>
   </body>
 
-  <script src="js/missions.js" type="module"></script>
+  <script src="js/missionDataScript.js" type="module"></script>
 </html>

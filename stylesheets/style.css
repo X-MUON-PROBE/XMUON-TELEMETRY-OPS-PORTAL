@@ -99,10 +99,10 @@ body {
 
 .leftSidebar
 {
+  width: 300px;
   height:100%;
   padding:35px 10px;
   background: #050505;
-  width: 300px;
 }
 
 .left{
@@ -215,18 +215,48 @@ body {
 
 .missionsHero {
   padding: 40px;
-  width: 100%;
+  width: calc(100vw - 300px);
   background: #090909;
+}
+
+.missionsTableContainer {
+  width:100%;
+  margin-top: 40px;
+  overflow: auto;
+  border: 2px solid #313C3F;
+  border-radius: 5px;
+  max-height: 700px;
 }
 
 .missionsTable {
   width: 100%;
-  border: 2px solid #313C3F;
-  border-radius: 5px;
+  padding: 20px;
+  border-collapse: collapse;
 }
 
-.missionsTable:th {
+tr:nth-child(even) {
+  background-color: #222222;
+}
+
+td, th {
+  border-bottom: 1px solid #242222;
+  border-right: 1px solid #242222;
+  text-align: left;
   padding: 20px;
+}
+
+th {
+  text-align: center;
+}
+
+.openMissionButton {
+  padding: 7px;
+  background-color: #d6b081;
+  border-radius: 5px;
+  width: 100%;
+  height: 60px;
+  font-weight: bolder;
+  cursor: pointer;
 }
 
 .overlay-lines{
