@@ -7,13 +7,13 @@ async function initMissionDashboardPage() {
     const missionData = await loadMissionData(Number(_missionID));
 
     document.getElementById("missionNameH1").innerHTML = missionData.missionData.missioN_NAME;
-    
-    requestAnimationFrame(() => {
-        for(let i = 0; i < missionData.missionMeasurementRecords.length; i++) {
-            document.getElementById("sessionList").innerHTML += `<tr>
+
+    let tableRowsDOMSTR = "";
+    for(let i = 0; i < missionData.missionMeasurementRecords.length; i++) {
+           tableRowsDOMSTR += `<tr>
                         <td style="padding: 20px;">${i}</td>
                         <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].totalGeigerCounts}</td>
-                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].geigerCountsPerMinute}</td>
+                        <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].geigerCountsPerSecond}</td>
                         <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].geigerDose}</td>
                         <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].temperature}</td>
                         <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].atmPressure}</td>
@@ -24,8 +24,10 @@ async function initMissionDashboardPage() {
                         <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].headingFloat}</td>
                         <td style="padding: 20px;">${missionData.missionMeasurementRecords[i].gyroChipTemperature}</td>
                     </tr>`;
-        }
-
+    }
+    
+    requestAnimationFrame(() => {
+	document.getElementById("sessionList").innerHTML = tableRowsDOMSTR;
         document.getElementById("TIME_HOURGLASS").style.display = "none";
     });
 }
@@ -46,6 +48,7 @@ function loadMissionData(missionID) {
         }).then(res => {
             return res.text();
         } ).then(data => {
+	    console.log(data);
             return JSON.parse(data);
         } ).then(json => {
             var LOGS = json;
