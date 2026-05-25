@@ -4,27 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>X-MUON PROBE - SESSÕES</title>
+    <link rel="stylesheet" href="fontawesome-free-7.0.0-web/fontawesome-free-7.0.0-web/css/all.css" />
     <link href="stylesheets/style.css" rel="stylesheet"/>
   </head>
 
   <body>
-    <div class="dashboard">
-      <div class="navbar panel">
-        <div style="display:flex; align-items:center; gap:60px;">
-          <div class="logo">
-            <span>✦</span> X-MUON PROBE - TELEMETRYOPS
-          </div>
-        </div>
-        <!--<input class="search" type="text" placeholder="Search missions, planets..." />-->
-      </div>
-
       <div class="pageContent">
         <!-- LEFT SIDEBAR -->
         <div class="leftSidebar">
+          <div class="logo">
+            <div class="logo-icon"></div>
+            <h1>XMUON PROBE</h1>
+            <COMP1/>
+          </div>
           <div class="nav-link-section">
-            <a class="nav-link" href="index.html">PÁGINA INICIAL</a>
-            <a class="nav-link active" href="missions.html">MISSÕES</a>
-            <a class="nav-link" href="#">SOBRE</a>
+            <a class="nav-link" href="index.html"><i class="fa-solid fa-house fa-lg" style="margin-right: 10px; color: white;"></i> Página Inicial</a>
+            <a class="nav-link active" href="missions.html"><i class="fa-solid fa-satellite fa-lg" style="margin-right: 10px; color: #fe602e;"></i> Sessões</a>
+            <a class="nav-link" href="#"><i class="fa-solid fa-circle-info fa-lg" style="margin-right: 10px; color: white;"></i> Sobre</a>
           </div>
         </div>
         <div class="missionsHero">
@@ -44,8 +40,8 @@
           </div>
         </div>
       </div>
-    </div>
   </body>
 
   <script src="js/missions.js" type="module"></script>
+  <script src="component.jsx"></script>
 </html>

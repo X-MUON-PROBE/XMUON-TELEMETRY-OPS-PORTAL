@@ -1,0 +1,36 @@
+import { useState } from 'react'
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import MainPage from './components/homePage.jsx'
+import MissionsPage from './components/missions.jsx'
+import './App.css'
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div class="pageContent">
+        <div class="leftSidebar">
+          <div class="logo">
+              <div class="logo-icon"></div>
+              <h1>XMUON PROBE</h1>
+          </div>
+          <div class="nav-link-section">
+              <Link class="nav-link active" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/"><i class="fa-solid fa-house fa-lg"></i> Página Inicial</Link>
+              <Link class="nav-link" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missions"><i class="fa-solid fa-satellite fa-lg"></i> Sessões</Link>
+              <Link class="nav-link" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/about"><i class="fa-solid fa-circle-info fa-lg"></i> Sobre</Link>
+          </div>
+        </div>
+
+        <div class="mainContent">
+          <Routes>
+            <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/" element={<MainPage />} />
+            <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missions" element={<MissionsPage />} />
+            <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/about" element={<MissionsPage />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
+  )
+}
+
+export default App

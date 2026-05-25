@@ -27,7 +27,7 @@ async function initMissionDashboardPage() {
     }
     
     requestAnimationFrame(() => {
-	document.getElementById("sessionList").innerHTML = tableRowsDOMSTR;
+    document.getElementById("sessionList").innerHTML = tableRowsDOMSTR;
         document.getElementById("TIME_HOURGLASS").style.display = "none";
     });
 }
@@ -48,7 +48,7 @@ function loadMissionData(missionID) {
         }).then(res => {
             return res.text();
         } ).then(data => {
-	    console.log(data);
+        console.log(data);
             return JSON.parse(data);
         } ).then(json => {
             var LOGS = json;
