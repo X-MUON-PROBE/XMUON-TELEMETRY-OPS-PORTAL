@@ -19,11 +19,11 @@ async function initMissionsPage() {
     }
 }
 
-initMissionsPage();
+//initMissionsPage();
 
 //#region METHODS
 
-function loadMissionsListData() {
+export function loadMissionsListData() {
     return new Promise((resolve, reject) => {
         const name = fetch(`http://${global.API_IP_ADDESS}:${global.API_PORT}/telemetry/getMissionList/`, {
             method: "GET",
@@ -39,7 +39,7 @@ function loadMissionsListData() {
 
             if(LOGS != null)
             {
-                console.log(LOGS);
+		console.log(LOGS);
                 resolve(LOGS);
             }
             else{
