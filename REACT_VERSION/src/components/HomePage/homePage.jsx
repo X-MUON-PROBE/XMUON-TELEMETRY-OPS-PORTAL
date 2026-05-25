@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import '../App.css'
+import '../../App.css'
 //import '../businessLogic/dashboardScript.js'
 
-function MainPage()
+export default function MainPage()
 {
     return (
     <>
@@ -108,5 +108,3 @@ function MainPage()
     </>
     )
 }
-
-export default MainPage

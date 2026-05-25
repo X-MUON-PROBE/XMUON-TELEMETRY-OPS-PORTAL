@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import MainPage from './components/homePage.jsx'
-import MissionsPage from './components/missions.jsx'
-import './App.css'
+import MainPage from './components/HomePage/homePage.jsx';
+import MissionsPage from './components/MissionsOverview/missions.jsx';
+import MissionDashboard from './components/MissionDashboard/missionDashboard.jsx';
+import './App.css';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/" element={<MainPage />} />
             <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missions" element={<MissionsPage />} />
             <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/about" element={<MissionsPage />} />
+            <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missionDashboard" element={<MissionDashboard />} />
           </Routes>
         </div>
       </div>

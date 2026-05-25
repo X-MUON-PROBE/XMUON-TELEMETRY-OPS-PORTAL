@@ -32,13 +32,11 @@ async function initMissionDashboardPage() {
     });
 }
 
-initMissionDashboardPage();
+//initMissionDashboardPage();
 
 //#region METHODS
 
-function loadMissionData(missionID) {
-    document.getElementById("missionsTable").innerHTML += `<div style="display: flex; flex-direction: row; width: 100%; justify-content: center; align-items: center; padding: 200px;"><i id="TIME_HOURGLASS" class="fa-solid fa-hourglass fa-5x fa-spin-pulse" style="color: #d6b081;"></i></div>`;
-
+export function loadMissionData(missionID) {
     return new Promise((resolve, reject) => {
         const name = fetch(`http://${global.API_IP_ADDESS}:${global.API_PORT}/telemetry/getMissionData_${missionID}`, {
             method: "GET",
@@ -55,7 +53,6 @@ function loadMissionData(missionID) {
 
             if(LOGS != null)
             {
-                console.log(LOGS);
                 resolve(LOGS);
             }
             else{

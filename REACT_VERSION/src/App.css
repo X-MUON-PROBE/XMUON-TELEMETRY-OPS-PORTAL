@@ -270,7 +270,7 @@ body {
 
 .missionsHero {
   padding: 40px;
-  padding-top: 20px;
+  padding-top: 70px;
   width: calc(100vw - 300px);
   overflow-y:auto;
   overflow-x:hidden;

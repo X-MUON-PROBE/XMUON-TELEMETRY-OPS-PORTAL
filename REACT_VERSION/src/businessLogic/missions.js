@@ -39,7 +39,7 @@ export function loadMissionsListData() {
 
             if(LOGS != null)
             {
-		console.log(LOGS);
+		        console.log(LOGS);
                 resolve(LOGS);
             }
             else{
