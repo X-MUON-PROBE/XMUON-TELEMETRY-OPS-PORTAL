@@ -62,4 +62,18 @@ export function loadMissionData(missionID) {
     });
 }
 
+// Convert magnetic field heading to compass point (16-point)
+export function getCompassPoint16(headingDeg) {
+    const MAGNETIC_DECLINATION = -3.5;
+    let trueHeadingDeg = headingDeg + MAGNETIC_DECLINATION; // adding a negative value = subtracting
+    const points = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    
+    if (trueHeadingDeg < 0) trueHeadingDeg += 360;
+  
+    headingDeg = (headingDeg + 360) % 360;
+    const index = Math.floor((headingDeg + 11.25) / 22.5) % 16;
+  
+    return points[index];
+}
+
 //#endregion METHODS

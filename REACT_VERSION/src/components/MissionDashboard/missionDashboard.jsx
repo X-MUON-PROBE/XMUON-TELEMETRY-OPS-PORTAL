@@ -41,8 +41,6 @@ function LogRow(props) {
 }
 
 function LogGroup(props) {
-    console.log("sdlkgfasdkfnsadklfnaskdfnaskljdfnlasjkdfnlkasjdnflkasdnfkljn");
-    console.log(props._missionDashboardData);
     let max = 201;
     if(props._missionDashboardData.length < 201){
         max = props._missionDashboardData.length;
@@ -90,7 +88,7 @@ export default function MissionDashboard() {
                 '...'
             ) : missionDashboardData.missionData.missioN_NAME}
 	    </h1>
-	    <hr style={{marginTop: '10px', backgroundColor: '#191919'}} />
+	    <hr style={{marginTop: '20px', marginBottom: '50px',backgroundColor: '#191919'}} />
 
 	  {!loading && (<LiveMainStats missionData={missionDashboardData.missionMeasurementRecords} />)}
 
