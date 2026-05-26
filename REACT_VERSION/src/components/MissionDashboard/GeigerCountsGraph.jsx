@@ -16,30 +16,32 @@ export default function GeigerCountsGraph({ missionData }) {
         geigerCountsPerSecond: record.geigerCountsPerSecond,
         geigerDose: record.geigerDose,
         temperature: record.temperature,
+	altitude: record.altitude,
+	timestamp: record.logTimestamp
     }));
 
     return (
         <div className="graph-container">
             <div className="graph-header">
-                <h2>Geiger Counter Analysis</h2>
+                <h2>Estatisticas Detetor Geiger:</h2>
                 <div className="chart-type-selector">
                     <button 
                         className={`chart-btn ${activeChart === 'line' ? 'active' : ''}`}
                         onClick={() => setActiveChart('line')}
                     >
-                        📈 Line Chart
+                        Contagens/log
                     </button>
                     <button 
                         className={`chart-btn ${activeChart === 'bar' ? 'active' : ''}`}
                         onClick={() => setActiveChart('bar')}
                     >
-                        📊 Bar Chart
+                        Atividade vs Altura/tempo
                     </button>
                     <button 
                         className={`chart-btn ${activeChart === 'combined' ? 'active' : ''}`}
                         onClick={() => setActiveChart('combined')}
                     >
-                        🔀 Combined View
+                        Dose vs Altura/tempo
                     </button>
                 </div>
             </div>
@@ -51,18 +53,18 @@ export default function GeigerCountsGraph({ missionData }) {
                         <XAxis 
                             dataKey="index" 
                             tick={{ fill: '#9f9f9f', fontSize: 12 }}
-                            label={{ value: 'Record Index', position: 'insideBottomRight', offset: -5, fill: '#9f9f9f' }}
+                            label={{ value: 'ID Log', position: 'insideBottomRight', offset: -5, fill: '#9f9f9f' }}
                         />
                         <YAxis 
                             yAxisId="left"
                             tick={{ fill: '#9f9f9f', fontSize: 12 }}
-                            label={{ value: 'Total Counts', angle: -90, position: 'insideLeft', fill: '#9f9f9f' }}
+                            label={{ value: 'Total Contagens', angle: -90, position: 'insideLeft', fill: '#9f9f9f' }}
                         />
                         <YAxis 
                             yAxisId="right"
                             orientation="right"
                             tick={{ fill: '#9f9f9f', fontSize: 12 }}
-                            label={{ value: 'Counts/Second', angle: 90, position: 'insideRight', fill: '#9f9f9f' }}
+                            label={{ value: 'Atividade (Bq)', angle: 90, position: 'insideRight', fill: '#9f9f9f' }}
                         />
                         <Tooltip 
                             contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #e45c1d', borderRadius: '4px' }}
@@ -77,7 +79,7 @@ export default function GeigerCountsGraph({ missionData }) {
                             stroke="#e45c1d" 
                             dot={false}
                             strokeWidth={2}
-                            name="Total Counts"
+                            name="Total Contagens"
                         />
                         <Line 
                             yAxisId="right"
@@ -86,7 +88,7 @@ export default function GeigerCountsGraph({ missionData }) {
                             stroke="#4a90e2" 
                             dot={false}
                             strokeWidth={2}
-                            name="Counts/Second"
+                            name="Atividade (Bq)"
                         />
                     </LineChart>
                 </ResponsiveContainer>
@@ -94,16 +96,23 @@ export default function GeigerCountsGraph({ missionData }) {
 
             {activeChart === 'bar' && (
                 <ResponsiveContainer width="100%" height={400}>
-                    <BarChart data={chartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+                    <LineChart data={chartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#333333" />
                         <XAxis 
-                            dataKey="index"
+                            dataKey="timestamp"
                             tick={{ fill: '#9f9f9f', fontSize: 12 }}
-                            label={{ value: 'Record Index', position: 'insideBottomRight', offset: -5, fill: '#9f9f9f' }}
+                            label={{ value: 'Instante (hh:mm:ss)', position: 'insideBottomRight', offset: -5, fill: '#9f9f9f' }}
                         />
                         <YAxis 
+		    	    yAxisId= "left"
                             tick={{ fill: '#9f9f9f', fontSize: 12 }}
-                            label={{ value: 'Geiger Counts', angle: -90, position: 'insideLeft', fill: '#9f9f9f' }}
+                            label={{ value: 'Atividade (Bq)', angle: -90, position: 'insideLeft', fill: '#9f9f9f' }}
+                        />
+		        <YAxis 
+		    	    yAxisId= "right"
+		    	    orientation= "right"
+                            tick={{ fill: '#9f9f9f', fontSize: 12 }}
+                            label={{ value: 'Altitude (m)', angle: -90, position: 'insideRight', fill: '#9f9f9f' }}
                         />
                         <Tooltip 
                             contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #e45c1d', borderRadius: '4px' }}
@@ -111,81 +120,92 @@ export default function GeigerCountsGraph({ missionData }) {
                             formatter={(value) => value.toFixed(2)}
                         />
                         <Legend wrapperStyle={{ paddingTop: '20px' }} />
-                        <Bar 
-                            dataKey="totalGeigerCounts" 
-                            fill="#e45c1d"
-                            name="Total Counts"
-                        />
-                        <Bar 
+                        <Line
+		    	    yAxisId="left"
+                            type="monotone" 
                             dataKey="geigerCountsPerSecond" 
-                            fill="#4a90e2"
-                            name="Counts/Second"
+                            stroke="#e45c1d" 
+                            dot={false}
+                            strokeWidth={2}
+                            name="Atividade (Bq)"
                         />
-                    </BarChart>
+		        <Line
+		    	    yAxisId="right"
+                            type="monotone" 
+                            dataKey="altitude" 
+                            stroke="#4a90e2"
+                            dot={false}
+                            strokeWidth={2}
+                            name="Altitude (m)"
+                        />
+                    </LineChart>
                 </ResponsiveContainer>
             )}
 
             {activeChart === 'combined' && (
                 <ResponsiveContainer width="100%" height={400}>
-                    <ComposedChart data={chartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#333333" />
+                    <LineChart data={chartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+		    	<CartesianGrid strokeDasharray="3 3" stroke="#333333" />
                         <XAxis 
-                            dataKey="index"
+                            dataKey="timestamp"
                             tick={{ fill: '#9f9f9f', fontSize: 12 }}
-                            label={{ value: 'Record Index', position: 'insideBottomRight', offset: -5, fill: '#9f9f9f' }}
+                            label={{ value: 'Instante (hh:mm:ss)', position: 'insideBottomRight', offset: -5, fill: '#9f9f9f' }}
                         />
                         <YAxis 
-                            yAxisId="left"
+		    	    yAxisId= "left"
                             tick={{ fill: '#9f9f9f', fontSize: 12 }}
-                            label={{ value: 'Total Counts', angle: -90, position: 'insideLeft', fill: '#9f9f9f' }}
+                            label={{ value: 'Dose (μSv)', angle: -90, position: 'insideLeft', fill: '#9f9f9f' }}
                         />
-                        <YAxis 
-                            yAxisId="right"
-                            orientation="right"
+		        <YAxis 
+		    	    yAxisId= "right"
+		    	    orientation= "right"
                             tick={{ fill: '#9f9f9f', fontSize: 12 }}
-                            label={{ value: 'Dose (μSv)', angle: 90, position: 'insideRight', fill: '#9f9f9f' }}
+                            label={{ value: 'Altitude (m)', angle: -90, position: 'insideRight', fill: '#9f9f9f' }}
                         />
                         <Tooltip 
                             contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #e45c1d', borderRadius: '4px' }}
                             labelStyle={{ color: '#f5f5f5' }}
-                            formatter={(value) => value.toFixed(4)}
+                            formatter={(value) => value.toFixed(2)}
                         />
                         <Legend wrapperStyle={{ paddingTop: '20px' }} />
-                        <Bar 
-                            yAxisId="left"
-                            dataKey="totalGeigerCounts" 
-                            fill="#e45c1d"
-                            name="Total Counts"
-                        />
-                        <Line 
-                            yAxisId="right"
+                        <Line
+		    	    yAxisId="left"
                             type="monotone" 
                             dataKey="geigerDose" 
-                            stroke="#ff7f50"
-                            strokeWidth={2}
+                            stroke="#e45c1d" 
                             dot={false}
-                            name="Radiation Dose"
+                            strokeWidth={2}
+                            name="Dose (μSv)"
                         />
-                    </ComposedChart>
+		        <Line
+		    	    yAxisId="right"
+                            type="monotone" 
+                            dataKey="altitude" 
+                            stroke="#4a90e2"
+                            dot={false}
+                            strokeWidth={2}
+                            name="Altitude (m)"
+                        />
+                    </LineChart>
                 </ResponsiveContainer>
             )}
 
             <div className="graph-stats">
                 <div className="stat-box">
-                    <h4>Peak Count</h4>
+                    <h4>Total Contagens</h4>
                     <p className="stat-value">{Math.max(...chartData.map(d => d.totalGeigerCounts)).toFixed(0)}</p>
                 </div>
                 <div className="stat-box">
-                    <h4>Average Count</h4>
-                    <p className="stat-value">{(chartData.reduce((sum, d) => sum + d.totalGeigerCounts, 0) / chartData.length).toFixed(2)}</p>
+                    <h4>Atividade Média</h4>
+                    <p className="stat-value">{(chartData.reduce((sum, d) => sum + d.geigerCountsPerSecond, 0) / chartData.length).toFixed(2)} Bq (Becquerel)</p>
                 </div>
                 <div className="stat-box">
-                    <h4>Peak Activity</h4>
-                    <p className="stat-value">{Math.max(...chartData.map(d => d.geigerCountsPerSecond)).toFixed(2)} cps</p>
+                    <h4>Atividade Máxima</h4>
+                    <p className="stat-value">{Math.max(...chartData.map(d => d.geigerCountsPerSecond)).toFixed(2)} Bq (Becquerel)</p>
                 </div>
                 <div className="stat-box">
-                    <h4>Max Dose</h4>
-                    <p className="stat-value">{Math.max(...chartData.map(d => d.geigerDose)).toFixed(4)} μSv</p>
+                    <h4>Dose Máxima</h4>
+                    <p className="stat-value">{Math.max(...chartData.map(d => d.geigerDose)).toFixed(4)} μSv (Micro Sieverts)</p>
                 </div>
             </div>
         </div>
