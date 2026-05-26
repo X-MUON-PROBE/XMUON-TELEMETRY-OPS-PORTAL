@@ -10,7 +10,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import * as missionDashboardScript from '../../businessLogic/missionDataScript.js';
 import MainPage from '../HomePage/homePage.jsx';
 import GeigerCountsGraph from './GeigerCountsGraph';
-import LiveMainStats from './LiveMainStats'
+import LiveMainStats from './liveMainStats'
 import '../../App.css';
 
 library.add(fas, far, fab);
@@ -85,18 +85,21 @@ export default function MissionDashboard() {
 
     return (
         <div class="missionsHero">
-          <h1 id="missionNameH1">
-            {loading ? (
+	    <h1 id="missionNameH1">
+	    	{loading ? (
                 '...'
             ) : missionDashboardData.missionData.missioN_NAME}
-          </h1>
+	    </h1>
+	    <hr style={{marginTop: '10px', backgroundColor: '#191919'}} />
+
+	  {!loading && (<LiveMainStats missionData={missionDashboardData.missionMeasurementRecords} />)}
+
           {!loading && (
             <GeigerCountsGraph missionData={missionDashboardData.missionMeasurementRecords} />
-		  <LiveMainStats missionData={missionDashboardData.missionMeasurementRecords} />
           )}
           <div id="missionsTable" class="missionsTableContainer">
             <table class="missionsTable">
-              <thead style={{ backgroundColor: '#4a2012ee', position: 'sticky', top: 0 }}>
+              <thead style={{ background: 'linear-gradient(135deg,#211611 0%,#141A22 100%)', position: 'sticky', top: 0 }}>
                 <tr>
                   <th>ID REGISTO</th>
                   <th>TOTAL CONTAGENS GEIGER (counts)</th>
