@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
 import * as missionsScript from '../../businessLogic/missions.js';
 import MainPage from '../HomePage/homePage.jsx';
+import NewMissionTrackingModal from './NewMissionTrackingModal.jsx'
+
 import '../../App.css';
 
 export default function MissionsPage() {
 	const [missionData, setMissionData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
 	useEffect(() => {
 		const fetchMissions = async () => {
@@ -32,13 +36,24 @@ export default function MissionsPage() {
 		return <div class="missionsHero"><h1>Erro ao carregar sessões: {error}</h1></div>;
 	}
 
+    const openMissionCreationWizzard = () => {
+        setIsModalOpen(true);
+    };
+    const closeMissionCreationWizzard = () => {
+        setIsModalOpen(false);
+    };
+
 	return (
         <>
             <div class="missionsHero">
-                <h1>SESSÕES DE MEDIÇÃO:</h1>
+                <NewMissionTrackingModal isOpen={isModalOpen} onClose={closeMissionCreationWizzard} onMissionCreated = {() => {}} />
+                <div class="missionsPickerHeaderSection">
+                    <h1>SESSÕES DE MEDIÇÃO:</h1>
+                    <button class="newMissionCreateBTN" onClick={openMissionCreationWizzard}>INICIAR NOVA MISSÃO</button>
+                </div>
                 <div class="missionsTableContainer">
                     <table class="missionsTable">
-                        <thead style={{backgroundColor: "#27221a", position: "sticky", top: 0}}>
+                        <thead>
                             <tr>
                             <th>ID SESSÃO</th>
                             <th>NOME SESSÃO</th>
@@ -47,14 +62,19 @@ export default function MissionsPage() {
                             </tr>
                         </thead>
                         <tbody id="sessionList">
-                            {missionData.map((session, index) => (
+                            {missionData.length > 0 ? missionData.map((session, index) => (
                                 <tr key={index}>
                                     <td style={{padding: "20px"}}>{session.missioN_ID}</td>
                                     <td style={{padding: "20px"}}>{session.missioN_NAME}</td>
                                     <td style={{padding: "20px"}}>{session.missioN_START_TIMESTAMP}</td>
                                     <td style={{padding: "0px !important"}}><Link to={`/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missionDashboard?missionID=${session.missioN_ID}`}><button class="openMissionButton" id={`openButton_${index}`}>ABRIR</button></Link></td>
                                 </tr>
-                            ))}
+                            )) : (
+                                <tr>
+                                    <td colSpan="4" class="emptyListBanner">
+                                        <h2>NENHUMA MISSÃO GRAVADA NA BASE DE DADOS.</h2>
+                                    </td>
+                                </tr>)}
                         </tbody>
                     </table>
                 </div>

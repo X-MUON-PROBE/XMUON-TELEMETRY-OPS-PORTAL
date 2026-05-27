@@ -17,7 +17,7 @@ function App() {
           </div>
           <div class="nav-link-section">
               <Link class="nav-link active" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/"><i class="fa-solid fa-house fa-lg"></i> Página Inicial</Link>
-              <Link class="nav-link" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missions"><i class="fa-solid fa-satellite fa-lg"></i> Sessões</Link>
+              <Link class="nav-link" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missions"><i class="fa-solid fa-satellite fa-lg"></i> Missões</Link>
               <Link class="nav-link" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/about"><i class="fa-solid fa-circle-info fa-lg"></i> Sobre</Link>
           </div>
         </div>

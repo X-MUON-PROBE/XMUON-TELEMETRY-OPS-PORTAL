@@ -1,0 +1,532 @@
+/* ============================== MODAL CONTAINER ============================== */
+
+.modal-container {
+  /*background: linear-gradient(135deg, #1a1a1a 0%, #121212 100%);*/
+  background-color: #0d0d0d;
+  border: 1px solid rgba(228, 92, 29, 0.3);
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(228, 92, 29, 0.1);
+  animation: slideUp 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ============================== CLOSE BUTTON ============================== */
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px 10px;
+  transition: all 0.2s ease;
+  z-index: 10001;
+}
+
+.modal-close-btn:hover {
+  color: #e45c1d;
+  transform: rotate(90deg);
+}
+
+/* ============================== TITLES & HEADERS ============================== */
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #f5f5f5;
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.success-header,
+.error-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.success-icon {
+  font-size: 48px;
+  color: #47ff88;
+  margin-bottom: 15px;
+  animation: scaleIn 0.4s ease-out;
+}
+
+.error-icon {
+  font-size: 48px;
+  color: #ff6b6b;
+  margin-bottom: 15px;
+  animation: shake 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* ============================== FORM STRUCTURE ============================== */
+
+.mission-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #d6b081;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.required {
+  color: #ff6b6b;
+  margin-left: 2px;
+}
+
+/* ============================== FORM INPUTS ============================== */
+
+.form-input {
+  background: rgba(255, 255, 255, 0.021);
+  border: 1px solid rgba(228, 92, 29, 0.2);
+  border-radius: 6px;
+  padding: 12px 15px;
+  color: #f5f5f5;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: #666;
+}
+
+.form-input:focus {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #e45c1d;
+  box-shadow: 0 0 0 3px rgba(228, 92, 29, 0.1);
+}
+
+.form-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-input.error {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.05);
+}
+
+.form-input.error:focus {
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.form-input.textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: "Inter", monospace;
+}
+
+/* ============================== ERROR MESSAGES ============================== */
+
+.error-message {
+  font-size: 12px;
+  color: #ff6b6b;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.error-message::before {
+  content: "⚠";
+  font-size: 10px;
+}
+
+/* ============================== CONNECTION VALIDATION ============================== */
+
+.connection-status-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.validate-btn {
+  flex: 1;
+  background: rgba(228, 92, 29, 0.15);
+  border: 1px solid rgba(228, 92, 29, 0.4);
+  border-radius: 6px;
+  color: #e45c1d;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+}
+
+.validate-btn:hover:not(:disabled) {
+  background: rgba(228, 92, 29, 0.25);
+  border-color: #e45c1d;
+  transform: translateY(-1px);
+}
+
+.validate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.validate-btn.testing {
+  background: rgba(228, 92, 29, 0.2);
+  border-color: #e45c1d;
+  color: #d6b081;
+}
+
+.validate-btn.connected {
+  background: rgba(71, 255, 136, 0.15);
+  border-color: rgba(71, 255, 136, 0.4);
+  color: #47ff88;
+}
+
+.validate-btn.failed {
+  background: rgba(255, 107, 107, 0.15);
+  border-color: rgba(255, 107, 107, 0.4);
+  color: #ff6b6b;
+}
+
+.status-indicator {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #999;
+  min-width: 150px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.status-indicator.idle {
+  color: #888;
+}
+
+.status-indicator.testing {
+  color: #d6b081;
+  background: rgba(228, 92, 29, 0.1);
+  border-color: rgba(228, 92, 29, 0.3);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.status-indicator.connected {
+  color: #47ff88;
+  background: rgba(71, 255, 136, 0.1);
+  border-color: rgba(71, 255, 136, 0.3);
+}
+
+.status-indicator.failed {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.3);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ============================== COORDINATES GROUP ============================== */
+
+.coordinates-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.coordinate-field {
+  gap: 6px;
+}
+
+@media (max-width: 500px) {
+  .coordinates-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================== SUCCESS DETAILS ============================== */
+
+.success-details {
+  margin-bottom: 30px;
+}
+
+.detail-box {
+  background: rgba(71, 255, 136, 0.05);
+  border: 1px solid rgba(71, 255, 136, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.detail-label {
+  font-size: 13px;
+  color: #999;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  flex: 0 0 auto;
+}
+
+.detail-value {
+  font-size: 14px;
+  color: #f5f5f5;
+  font-weight: 500;
+  text-align: right;
+  flex: 1;
+  word-break: break-all;
+}
+
+.detail-value.status-pending {
+  color: #e45c1d;
+  font-weight: 600;
+}
+
+.countdown-message {
+  text-align: center;
+  color: #d6b081;
+  font-size: 13px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ============================== ERROR MESSAGE CONTAINER ============================== */
+
+.error-message-container {
+  background: rgba(255, 107, 107, 0.05);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.error-text {
+  font-size: 15px;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.error-hint {
+  font-size: 13px;
+  color: #999;
+  margin: 0;
+}
+
+/* ============================== FORM ACTIONS ============================== */
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-cancel,
+.btn-submit {
+  flex: 1;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-cancel {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #c0c0c0;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #f5f5f5;
+}
+
+.btn-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #e45c1d 0%, #c73f0f 100%);
+  color: #0d0d0d;
+  border: 1px solid #ff7a3f;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff6a2d 0%, #d65419 100%);
+  border-color: #ff8f5c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(228, 92, 29, 0.3);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================== SCROLLBAR ============================== */
+
+.modal-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+  background: rgba(228, 92, 29, 0.4);
+  border-radius: 3px;
+}
+
+.modal-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(228, 92, 29, 0.6);
+}
+
+/* ============================== RESPONSIVE DESIGN ============================== */
+
+@media (max-width: 600px) {
+  .modal-container {
+    padding: 30px 20px;
+    border-radius: 10px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    margin-bottom: 25px;
+  }
+
+  .form-input {
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  .success-icon,
+  .error-icon {
+    font-size: 40px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detail-value {
+    text-align: left;
+    margin-top: 5px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    width: 100%;
+  }
+
+  .coordinates-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================== ANIMATIONS FOR ICONS ============================== */
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+svg.fa-spinner {
+  animation: spin 1s linear infinite;
+}

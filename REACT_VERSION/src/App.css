@@ -279,17 +279,47 @@ body {
 
 .missionsTableContainer {
   width:100%;
-  margin-top: 40px;
+  margin-top: 30px;
   overflow: auto;
   border: 2px solid #313C3F;
   border-radius: 5px;
   max-height: 700px;
 }
 
+.missionsPickerHeaderSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.newMissionCreateBTN {
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 5px;
+  font-family: Inter, sans-serif;
+  font-size: 1.3em;
+  font-weight: bolder;
+  background-color: #e45c1d;
+  color: #0d0d0d;
+  cursor: pointer;
+}
+
+.newMissionCreateBTN:hover {
+  background-color: #e45c1dbe;
+}
+
 .missionsTable {
   width: 100%;
   padding: 20px;
   border-collapse: collapse;
+}
+
+.missionsTable thead {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(135deg, rgba(228, 92, 29, 0.1) 0%, rgba(74, 144, 226, 0.1) 100%);
 }
 
 tr:nth-child(even) {
@@ -304,6 +334,11 @@ td, th {
 }
 
 th {
+  text-align: center;
+}
+
+.emptyListBanner {
+  padding: 100px;
   text-align: center;
 }
 

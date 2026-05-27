@@ -84,9 +84,11 @@ export default function MissionDashboard() {
     return (
         <div class="missionsHero">
 	    <h1 id="missionNameH1">
-	    	{loading ? (
+            <span style={{color: '#e45c1d'}}>
+                {loading ? (
                 '...'
             ) : missionDashboardData.missionData.missioN_NAME}
+            </span> - PAINEL DE CONTROLO DE MISSÃO
 	    </h1>
 	    <hr style={{marginTop: '20px', marginBottom: '50px',backgroundColor: '#191919'}} />
 
