@@ -75,6 +75,8 @@ export default function MissionDashboard() {
         };
 
         fetchMissionData();
+	missionDashboardScript.startSignalRConnection();
+	missionDashboardScript.addSignalRListener("ReceiveDashboardUpdate", fetchMissionData);
     }, []);
 
 	if (error) {
@@ -122,9 +124,15 @@ export default function MissionDashboard() {
                         <FontAwesomeIcon icon="fa-solid fa-hourglass" spinPulse size="5x" style={{ color: '#d6b081' }} />
                     </td>
                   </tr>
-                ) : (
+                ) : (missionDashboardData.missionMeasurementRecords.length > 0 ? (
                   <LogGroup _missionDashboardData={ missionDashboardData.missionMeasurementRecords } />
-                )}
+                ) : (
+		  <tr>
+                    <td colSpan="12" style={{ padding: '200px', textAlign: 'center' }}>
+                        <h1>DE MOMENTO, NÃO EXISTEM DADOS RELATIVAMENTE A ESTA MISSÃO.</h1>
+                    </td>
+                  </tr>
+		))}
               </tbody>
             </table>
           </div>

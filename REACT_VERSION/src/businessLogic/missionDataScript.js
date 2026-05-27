@@ -1,4 +1,7 @@
+import { HubConnectionBuilder, HubConnectionState } from '@microsoft/signalr';
 import * as global from "./global.js";
+
+let connection = null;
 
 async function initMissionDashboardPage() {
     const urlGETVariablesSection = window.location.href.split("?")[1];
@@ -75,5 +78,51 @@ export function getCompassPoint16(headingDeg) {
   
     return points[index];
 }
+
+// 1. Initialize and start the connection
+export const startSignalRConnection = async () => {
+  if (connection && connection.state !== HubConnectionState.Disconnected) {
+    return connection; // Avoid creating duplicate connections
+  }
+
+  connection = new HubConnectionBuilder()
+    .withUrl(`http://${global.API_IP_ADDESS}:${global.API_PORT}/fileDashboardDataChannel`).withAutomaticReconnect().build();
+
+  try {
+    await connection.start();
+    console.log('SignalR Connected from JS file.');
+    return connection;
+  } catch (err) {
+    console.error('SignalR Connection Error: ', err);
+    setTimeout(startSignalRConnection, 5000); // Optional: retry logic
+  }
+};
+
+// 2. Register listeners using a callback function to send data back to React
+export function addSignalRListener(eventName, callback) {
+  if (connection) {
+    connection.on(eventName, callback);
+  }
+};
+
+// 3. Remove listeners when React components unmount
+export const removeSignalRListener = (eventName) => {
+  if (connection) {
+    connection.off(eventName);
+  }
+};
+
+// 4. Send data to the backend server
+export const sendSignalRMessage = async (methodName, ...args) => {
+  if (connection && connection.state === HubConnectionState.Connected) {
+    try {
+      await connection.invoke(methodName, ...args);
+    } catch (err) {
+      console.error(`Error invoking ${methodName}: `, err);
+    }
+  } else {
+    console.warn('Cannot send message; SignalR is not connected.');
+  }
+};
 
 //#endregion METHODS
