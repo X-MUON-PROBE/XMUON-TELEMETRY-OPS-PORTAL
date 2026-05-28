@@ -6,7 +6,10 @@ import MissionsPage from './components/MissionsOverview/missions.jsx';
 import MissionDashboard from './components/MissionDashboard/missionDashboard.jsx';
 import './App.css';
 
-function App() {
+//####################################################################################################################################
+//####################################################################################################################################
+
+export default function App() {
   return (
     <BrowserRouter>
       <div class="pageContent">
@@ -34,5 +37,3 @@ function App() {
     </BrowserRouter>
   )
 }
-
-export default App

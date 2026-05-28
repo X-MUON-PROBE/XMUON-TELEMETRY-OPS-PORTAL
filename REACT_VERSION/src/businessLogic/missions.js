@@ -1,28 +1,14 @@
 import * as global from "./global.js";
 
-async function initMissionsPage() {
-    const missionData = await loadMissionsListData();
-
-    for(let i = 0; i < missionData.length; i++) {
-        document.getElementById("sessionList").innerHTML += `<tr>
-                    <td style="padding: 20px;">${missionData[i].missioN_ID}</td>
-                    <td style="padding: 20px;">${missionData[i].missioN_NAME}</td>
-                    <td style="padding: 20px;">${missionData[i].missioN_START_TIMESTAMP}</td>
-                    <td style="padding: 0px !important;"><button class="openMissionButton" id="openButton_${i}">ABRIR</button></td>
-                </tr>`;
-
-        requestAnimationFrame(() => {
-            document.getElementById(`openButton_${i}`).addEventListener("click", () => {
-                openMissionDashboard(missionData[i].missioN_ID);
-            });
-        });
-    }
-}
-
-//initMissionsPage();
+//####################################################################################################################################
+//####################################################################################################################################
 
 //#region METHODS
 
+/**
+ * This function loads the list of flight missions from the DB, contacting the API.
+ * @returns {Promise} A promise resolving to the list of missions or rejecting with an error.
+ */
 export function loadMissionsListData() {
     return new Promise((resolve, reject) => {
         const name = fetch(`http://${global.API_IP_ADDESS}:${global.API_PORT}/telemetry/getMissionList/`, {
@@ -47,11 +33,6 @@ export function loadMissionsListData() {
             }
         });
     });
-}
-
-function openMissionDashboard(missionID) {
-    const splitedURL = window.location.href.split("/");
-    window.location.href = splitedURL[0] + splitedURL[1] + `missionPage.html?missionID=${missionID}`;
 }
 
 //#endregion METHODS

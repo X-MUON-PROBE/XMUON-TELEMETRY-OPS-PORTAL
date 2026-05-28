@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, ComposedChart } from 'recharts';
 
 import AtomicInfoCard from './informationCards.jsx';
 import './GeigerCountsGraph.css';
 
-export default function GeigerCountsGraph({ missionData }) {
+//####################################################################################################################################
+//####################################################################################################################################
+
+export default function GeigerCountsGraph({ missionStats }) {
     const [activeChart, setActiveChart] = useState('line');
+
+    const [missionData, setMissionData] = useState([]);
+    const [numericGeigerStats, setNumericGeigerStats] = useState(missionStats?.numericGeigerStats ?? {});
+
+    useEffect(() => {
+        setMissionData(missionStats != null ? missionStats.missionMeasurementRecords : []);
+        setNumericGeigerStats(missionStats?.numericGeigerStats ?? {});
+    }, [missionStats]);
+
 
     if (!missionData || missionData.length === 0) return <div className="graph-container">No data available</div>;
 
@@ -19,10 +31,17 @@ export default function GeigerCountsGraph({ missionData }) {
         timestamp: record.logTimestamp
     }));
 
-    const totalGeigerCounts = Math.max(...chartData.map(d => d.totalGeigerCounts)).toFixed(0);
-    const averageActivity = (chartData.reduce((sum, d) => sum + d.geigerCountsPerSecond, 0) / chartData.length).toFixed(2);
-    const maxActivity = Math.max(...chartData.map(d => d.geigerCountsPerSecond)).toFixed(2);
-    const maxDose = Math.max(...chartData.map(d => d.geigerDose)).toFixed(4);
+    const numericGeigerData = {
+        totalGeigerCounts: numericGeigerStats.totaL_GEIGER_COUNTS,
+        avgActivity: numericGeigerStats.avG_ACTIVITY,
+        maxActivity: numericGeigerStats.maX_ACTIVITY,
+        maxGeigerDose: numericGeigerStats.maX_GEIGER_DOSE,
+    };
+
+    const totalGeigerCounts = numericGeigerData.totalGeigerCounts;
+    const averageActivity = numericGeigerData.avgActivity.toFixed(2);
+    const maxActivity = numericGeigerData.maxActivity.toFixed(2);
+    const maxDose = numericGeigerData.maxGeigerDose.toFixed(4);
 
     return (
         <div className="graph-container">

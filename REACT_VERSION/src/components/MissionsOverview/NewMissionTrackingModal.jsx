@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +8,9 @@ import * as _globalConfig from '../../businessLogic/global.js';
 import './NewMissionTrackingModal.css';
 
 library.add(fas);
+
+//####################################################################################################################################
+//####################################################################################################################################
 
 export default function NewMissionTrackingModal({ isOpen, onClose, onMissionCreated }) {
     // ==================== STATE MANAGEMENT ====================
@@ -84,7 +88,7 @@ export default function NewMissionTrackingModal({ isOpen, onClose, onMissionCrea
 
         try {
             // TODO: Replace with actual API endpoint from your backend
-            const response = await fetch(`http://${formData.receiverIP}/api/establishConnection`, {
+            const response = await fetch(`http://${formData.receiverIP}/api/testConnection`, {
                 method: 'GET'
             });
 
@@ -166,33 +170,31 @@ export default function NewMissionTrackingModal({ isOpen, onClose, onMissionCrea
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                },
-                /*body: JSON.stringify({
-                    missioN_NAME: formData.missionCodename,
-                    receiverIP: formData.receiverIP,
-                    launchNotes: formData.launchNotes,
-                    initialLatitude: formData.latitude || null,
-                    initialLongitude: formData.longitude || null,
-                    missioN_START_TIMESTAMP: new Date().toISOString()
-                })*/
+                }
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                setNewMissionData({
-                    missionID: data.missioN_ID,
+                const arduinoMissionNegotiation = await fetch(`http://${formData.receiverIP}/api/establishConnection?missionID=${data.missionID}`, {
+                    method: 'GET'
+                });
+
+                const missionDataBatch = {
+                    missionID: data.missionID,
                     codename: formData.missionCodename,
                     receiverIP: formData.receiverIP,
                     location: formData.launchNotes,
                     createdAt: new Date().toLocaleTimeString('pt-PT')
-                });
+                };
+
+                setNewMissionData(missionDataBatch);
                 setStep('success');
 
                 // Auto-redirect after 5 seconds
                 setTimeout(() => {
                     if (onMissionCreated) {
-                        onMissionCreated(data.missioN_ID);
+                        onMissionCreated(data.missionID);
                     }
                 }, 5000);
             } else {
@@ -436,13 +438,12 @@ export default function NewMissionTrackingModal({ isOpen, onClose, onMissionCrea
                             >
                                 Fechar
                             </button>
-                            <button
-                                type="button"
-                                onClick={handleGoToDashboard}
+                            <Link
+                                to={`/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missionDashboard?missionID=${newMissionData.missionID}`}
                                 className="btn-submit"
                             >
                                 <FontAwesomeIcon icon="fa-solid fa-arrow-right" /> IR PARA PAINEL AGORA
-                            </button>
+                            </Link>
                         </div>
                     </>
                 )}

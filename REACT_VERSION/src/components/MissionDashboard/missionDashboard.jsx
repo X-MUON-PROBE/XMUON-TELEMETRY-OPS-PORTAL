@@ -11,6 +11,7 @@ import * as missionDashboardScript from '../../businessLogic/missionDataScript.j
 import MainPage from '../HomePage/homePage.jsx';
 import GeigerCountsGraph from './GeigerCountsGraph';
 import LiveMainStats from './liveMainStats'
+import AtmosphericConditionsGraph from './AtmosphericConditionsGraph.jsx';
 import '../../App.css';
 
 library.add(fas, far, fab);
@@ -55,7 +56,7 @@ function LogGroup(props) {
 }
 
 export default function MissionDashboard() {
-    const [missionDashboardData, setMissionDashboardData] = useState([]);
+    const [missionDashboardData, setMissionDashboardData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -75,8 +76,8 @@ export default function MissionDashboard() {
         };
 
         fetchMissionData();
-	missionDashboardScript.startSignalRConnection();
-	missionDashboardScript.addSignalRListener("ReceiveDashboardUpdate", fetchMissionData);
+        missionDashboardScript.startSignalRConnection(missionID);
+        missionDashboardScript.addSignalRListener("ReceiveDashboardUpdate", fetchMissionData);
     }, []);
 
 	if (error) {
@@ -94,11 +95,20 @@ export default function MissionDashboard() {
 	    </h1>
 	    <hr style={{marginTop: '20px', marginBottom: '50px',backgroundColor: '#191919'}} />
 
-	  {!loading && (<LiveMainStats missionData={missionDashboardData.missionMeasurementRecords} />)}
+	      {!loading && (<LiveMainStats missionData={missionDashboardData.missionMeasurementRecords} />)}
 
           {!loading && (
-            <GeigerCountsGraph missionData={missionDashboardData.missionMeasurementRecords} />
+            <GeigerCountsGraph missionStats={missionDashboardData} />
           )}
+
+          {!loading && (
+            <AtmosphericConditionsGraph missionStats={missionDashboardData} />
+          )}
+
+          <br/>
+          <br/>
+          <h2>TOP 200 MEDIÇÕES (MAIS RECENTES):</h2>
+          <br/>
           <div id="missionsTable" class="missionsTableContainer">
             <table class="missionsTable">
               <thead style={{ background: 'linear-gradient(135deg,#211611 0%,#141A22 100%)', position: 'sticky', top: 0 }}>
