@@ -1,5 +1,8 @@
 import * as global from "./global.js";
 
+//####################################################################################################################################
+//####################################################################################################################################
+
 async function initMissionDashboardPage() {
     const urlGETVariablesSection = window.location.href.split("?")[1];
     const _missionIDField = urlGETVariablesSection.split("&")[0];
