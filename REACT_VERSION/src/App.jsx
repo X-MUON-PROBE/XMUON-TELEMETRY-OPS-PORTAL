@@ -19,15 +19,15 @@ export default function App() {
               <h1>XMUON PROBE</h1>
           </div>
           <div class="nav-link-section">
-              <Link class="nav-link active" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/"><i class="fa-solid fa-house fa-lg"></i> Página Inicial</Link>
-              <Link class="nav-link" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missions"><i class="fa-solid fa-satellite fa-lg"></i> Missões</Link>
-              <Link class="nav-link" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/about"><i class="fa-solid fa-circle-info fa-lg"></i> Sobre</Link>
+              {/*<Link class="nav-link active" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/"><i class="fa-solid fa-house fa-lg"></i> Página Inicial</Link>*/}
+              <Link class="nav-link active" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missions"><i class="fa-solid fa-satellite fa-lg"></i> Missões</Link>
+              {/*<Link class="nav-link" to="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/about"><i class="fa-solid fa-circle-info fa-lg"></i> Sobre</Link>*/}
           </div>
         </div>
 
         <div class="mainContent">
           <Routes>
-            <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/" element={<MainPage />} />
+            <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/" element={<MissionsPage />} />
             <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missions" element={<MissionsPage />} />
             <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/about" element={<MissionsPage />} />
             <Route path="/XMUON-TELEMETRY-OPS-WEB-PORTAL/REACT_VERSION/dist/missionDashboard" element={<MissionDashboard />} />

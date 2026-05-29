@@ -22,7 +22,7 @@ export default function AtmosphericConditionsGraph({ missionStats }) {
         geigerCountsPerSecond: record.geigerCountsPerSecond,
         geigerDose: record.geigerDose,
         temperature: record.temperature,
-        atmPressure: record.atmPressure,
+        atmPressure: record.atmPressure / 100.0,
         altitude: record.altitude,
         timestamp: record.logTimestamp
     }));
@@ -30,7 +30,7 @@ export default function AtmosphericConditionsGraph({ missionStats }) {
     const distData = tempPressOverAltitudeDistribution.map((record, index) => ({
         index: index,
         temperature: record.temperature,
-        atmPressure: record.atmPressure,
+        atmPressure: record.atmPressure / 100.0,
         altitude: record.altitude
     }));
 
@@ -42,6 +42,9 @@ export default function AtmosphericConditionsGraph({ missionStats }) {
 
     useEffect(() => {
         if (missionStats) {
+            setMissionData(missionStats.missionMeasurementRecords);
+            setTempPressOverAltitudeDistribution(missionStats.tempAndATMPressureDistribution);
+            setNumericAtmStats(missionStats.numericAtmStats);
             setMaxAltitude(missionStats.numericAtmStats.maX_ALTITUDE.toFixed(2));
             setMaxPressure((missionStats.numericAtmStats.maX_PRESSURE / 100).toFixed(2));
             setMaxTemperature(missionStats.numericAtmStats.maX_TEMPERATURE.toFixed(2));
