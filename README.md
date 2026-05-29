@@ -303,30 +303,13 @@ A aplicação estará disponível em `http://localhost:5173` (porta predefinida 
 npm run build
 ```
 
-Os arquivos otimizados estarão em `REACT_VERSION/dist/`
-
-### Verificação de Qualidade de Código
-
-```bash
-npm run lint
-```
-
 ---
 
 ## 📚 Referências e Recursos
 
-- **Repositório do Código da Sonda**: https://github.com/eduard0sa/ATM_MUON_DETECTION_PROBE
-- **Programa LIP4SCHOOLS**: Iniciativa de envolvimento escolar em investigação de partículas
-- **Física de Muões**: Modelo Padrão, Física de Altas Energias
-- **Deteção de Radiação**: Tubos Geiger-Müller, Espectroscopia de Raios Cósmicos
-
----
-
-## 🤝 Contribuidores
-
-- **Desenvolvedor Principal**: Eduardo Xavier Oliveira Sá (Colégio Internato dos Carvalhos)
-- **Instituição**: Laboratório de Instrumentação e Física Experimental de Partículas (LIP)
-- **Data de Desenvolvimento**: Abril de 2025
+- **Documentação e conceitos teóricos do aparelho:**: https://github.com/X-MUON-PROBE/XMUON-TELEMETRY-OPS-PORTAL/tree/main/DOCS/ATM_MUONIC_PROBE
+- **Código fonte website (versão atualizada): https://github.com/X-MUON-PROBE/XMUON-TELEMETRY-OPS-PORTAL/tree/main/REACT_VERSION**
+- **Página do projeto XMUON-PROBE (onde os restantes repositórios estão disponibilizados): https://github.com/X-MUON-PROBE**
 
 ---
 
@@ -341,6 +324,13 @@ Este projeto está associado ao programa educacional LIP4SCHOOLS e segue os term
 - [Documentação Científica](./ATM_MUONIC_PROBE/)
 - [Projeto X-MUON PROBE](./ATM_MUONIC_PROBE/MUON-X%20PROBE%20-%20CONCEITO%20&%20IMPLEMENTAÇÃO.md)
 - [Contexto Teórico](./ATM_MUONIC_PROBE/DETECÇÃO%20E%20ANÁLISE%20DE%20MUÕES%20COSMICOS%20-%20CONTEXTO%20TEÓRICO.md)
+
+---
+
+## 🤝 Contribuidores
+
+- Desenvolvido por Eduardo Xavier Oliveira Sá <a href="https://github.com/eduard0sa">(eduard0sa)</a> e Prof. José Gama, aluno e docente do Colégio Internato dos Carvalhos (CIC), com a orientação do Laboratório de Instrumentação e Física Experimental de Partículas (LIP).
+- Abril - Junho de 2026
 
 ---
 
