@@ -43,14 +43,18 @@ export function loadMissionData(missionID) {
  * @returns {string} Compass point, with intermidiate point-precision (e.g., N, NNE, NE, etc.).
  */
 export function getCompassPoint16(headingDeg) {
-    const MAGNETIC_DECLINATION = -3.5;
+    //const MAGNETIC_DECLINATION = -3.5;
+    const MAGNETIC_DECLINATION = 0;
     let trueHeadingDeg = headingDeg + MAGNETIC_DECLINATION; // adding a negative value = subtracting
     const points = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
     
     if (trueHeadingDeg < 0) trueHeadingDeg += 360;
   
-    headingDeg = (headingDeg + 360) % 360;
-    const index = Math.floor((headingDeg + 11.25) / 22.5) % 16;
+    //headingDeg = (headingDeg + 360) % 360;
+    
+    //const index = Math.floor((headingDeg + 11.25) / 22.5) % 16;
+    console.log(`True Heading: ${trueHeadingDeg}°`);
+    const index = Math.floor(trueHeadingDeg / 22.50);
   
     return points[index];
 }

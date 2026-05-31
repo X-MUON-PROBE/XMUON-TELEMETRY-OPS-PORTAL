@@ -13,6 +13,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <div class="pageContent">
+        <title>XMUON PROBE - Dashboard</title>
         <div class="leftSidebar">
           <div class="logo">
               <div class="logo-icon"></div>
